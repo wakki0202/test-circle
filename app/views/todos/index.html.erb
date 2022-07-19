@@ -17,7 +17,7 @@
   </div>
  
   <% if current_user != @user %>
-  test
+  test3
   <%= link_to 'chatを始める', talk_path(current_user.id)%>
 <% end %>
  <%= button_to 'Exit', destroy_user_session_path, method: :delete %>
