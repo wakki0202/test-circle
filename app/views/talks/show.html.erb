@@ -1,0 +1,26 @@
+<div>
+<table>
+    <thead>
+        <tr>
+            <td>投稿者名</td>
+            <td>投稿内容</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @talks.each do |talk| %>
+            <tr>
+                <td><%= talk.user.email %></td>
+                <td><%= talk.message %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+</div>
+<div>
+<%= form_with model: @talk do |f| %>
+    <%= f.text_field :message, placeholder: "message" %>
+    <%= f.hidden_field :room_id %>
+    <%= f.submit "送信する"  %>
+<% end %>
+</div>
+<%= button_to 'トークルーム一覧', users_index_path, method: :get %>

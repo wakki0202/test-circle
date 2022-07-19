@@ -3,13 +3,31 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Todos</h1>
+ 
+
+<% if user_signed_in? %>
+   <%# この間に書かれた内容はログインユーザーのみ見れる %>
+    <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl text-blue-300">Todos</h1>
     <%= link_to 'New todo', new_todo_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <div id="todos" class="min-w-full">
     <%= render @todos %>
   </div>
+  <% if current_user.following?(@user) %>
+  <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
+<% else %>
+  <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
+<% end %>
+  <% if current_user != @user %>
+  <%= link_to 'chatを始める', talk_path(current_user.id)%>
+<% end %>
+ <%= button_to 'Exit', destroy_user_session_path, method: :delete %>
+<% else %>
+   <%# この間に書かれた内容はログインしていないユーザーのみ見れる %>
+   <%= link_to "ログイン", new_user_session_path, class: 'post' %>
+          <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
+<% end %>
 </div>
 

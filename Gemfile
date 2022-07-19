@@ -73,3 +73,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'devise'
+gem 'jquery-rails'
